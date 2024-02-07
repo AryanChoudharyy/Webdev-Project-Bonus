@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+   <link rel="stylesheet" href="/css/Styles.css" />
+   <link rel="icon" href="https://img.icons8.com/fluency/16/cryptocurrency.png" type="image/x-icon">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="navbar-left">
+          <form method="post">
+            <select name="selectCoin" onchange="this.form.submit()" style="height: 50px; width: 300px;">
+              <option>Select Coin</option>
+              <option value="avalance-2">Avalanche (AVAX)</option>
+              <option value="binancecoin">Binance (BNB)</option>
+              <option value="bitcoin">Bitcoin (BTC)</option>
+              <option value="cardano">Cardano (ADA)</option>
+              <option value="decentraland">Decentraland (MANA)</option>
+              <option value="dogecoin">Dogecoin (DOGE)</option>
+              <option value="ethereum">Ethereum (ETH)</option>
+              <option value="ripple">Ripple (XRP)</option>
+              <option value="solana">Solana (SOL)</option>
+              <option value="tether">Tether (USDT)</option>
+            </select>
+          </form>
+            </select>
+          </form>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle" checked>
+          <span class="slider round"></span>
+      </label>
+        <div class="navbar-right">
+          <h1 style="float: right;">Crypto Dashboard</h1>
+        </div>
+      </nav>
+
+    </header>
+   
+    <!-- <div> <%- mData.sentiment_votes_up_percentage %> %</div> -->
+    
+    
+   <div id="selectedCoin" style="text-align: center; font-weight: bold;"></div>
+
+   <div id="chart">
+
+    </div>
+    
+    
+    <script>
+       
+       let mCapData = '<%- JSON.stringify(mChart.market_caps) %>'
+       mCapData = String(mCapData)
+       mCapData = JSON.parse(mCapData)
+
+       let mVolData = '<%- JSON.stringify(mChart.total_volumes) %>'
+       mVolData = String(mVolData)
+       mVolData = JSON.parse(mVolData)
+
+      var options = {
+        chart: {
+          height:300,
+          width:800,
+          type: 'area'
+        },
+        series: [{
+          
+            name: 'Market Cap',
+            data: mCapData,
+            type: "area"
+          },
+          {
+            name: 'Total Volume',
+            data: mVolData,
+            type: "line"
+
+          }
+
+        ],
+        xaxis: {
+          type: "datetime"
+        }, dataLabels: {
+          enabled: false
+        },
+
+        yaxis: [
+          {
+            title: {
+              text: 'Series A',
+            },
+          },
+          {
+            opposite: true,
+            title: {
+              text: 'Series B',
+            },
+          },
+          ],
+          colors: ['#0080ff','#00ff9d']
+        
+      }
+
+      var chart = new ApexCharts(document.querySelector('#chart'), options)
+
+      chart.render()
+
+      function updateSelectedCoinName() {
+    const selectedCoinElement = document.getElementById('selectedCoin');
+    const selectedCoin = document.getElementById('selectCoin').value;
+
+    if (selectedCoinElement && selectedCoin) {
+      selectedCoinElement.innerText = `Selected Coin: ${selectedCoin}`;
+    }
+  }
+
+  // Attach the function to the onchange event of the select element
+  document.getElementById('selectCoin').addEventListener('change', updateSelectedCoinName);
+
+    </script>
+  </body>
+  <footer>
+    <hr />
+    Made with ❤ by
+    <a href="mailto:aryan.23bcs10080@ms.sst.scaler.com" target="_blank"
+      >Aryan Choudhary</a
+    >.
+  </footer>
+</html>
