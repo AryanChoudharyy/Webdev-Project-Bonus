@@ -7,7 +7,6 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "main": "./views/index.ejs",
   "dependencies": {
     "body-parser": "^1.20.2",
     "codemon": "^0.1.31-development",
